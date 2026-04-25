@@ -1,0 +1,52 @@
+# ==============================
+# 00_setup.R
+# Project setup and packages
+# ==============================
+
+required_cran <- c(
+  "tidyverse",
+  "ggplot2",
+  "pheatmap",
+  "pROC"
+)
+
+required_bioc <- c(
+  "GEOquery",
+  "DESeq2",
+  "clusterProfiler",
+  "org.Hs.eg.db",
+  "AnnotationDbi"
+)
+
+for (pkg in required_cran) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+
+for (pkg in required_bioc) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    BiocManager::install(pkg)
+  }
+}
+
+library(tidyverse)
+library(GEOquery)
+library(DESeq2)
+library(ggplot2)
+library(pheatmap)
+library(pROC)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+
+dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
+dir.create("data/processed", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/tables", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/figures", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/models", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/r_objects", recursive = TRUE, showWarnings = FALSE)
